@@ -11,24 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-//
-//    public function login(Request $request)
-//    {
-//        $loginData = $request->validate([
-//            'email' => 'email|required',
-//            'password' => 'required'
-//        ]);
-//
-//        if(!auth()->attempt($loginData)) {
-//            return response(['message'=>'Invalid credentials']);
-//        }
-//
-//        $accessToken = auth()->user()->createToken('authToken')->accessToken;
-//
-//        return response(['user' => auth()->user(), 'access_token' => $accessToken]);
-//
-//
-//    }
+
     /**
      * Login user and create token
      *
@@ -43,7 +26,6 @@ class AuthController extends Controller
             'email' => 'email|required',
             'password' => 'required'
         ]);
-//        $credentials = request(['email', 'password']);
 
         if(!Auth::attempt($loginData)){
         return response()->json([
@@ -54,17 +36,11 @@ class AuthController extends Controller
         $user = $request->user();
         $tokenResult = $user->createToken('authToken');
         $token = $tokenResult->token;
-//
-//        if ($request->remember_me)
-//        $token->expires_at = Carbon::now()->addWeeks(1);
-//        $token->save();
-//
+
+
         return response()->json([
         'access_token' => $tokenResult->accessToken,
         'token_type' => 'Bearer',
-//        'expires_at' => Carbon::parse(
-//            $tokenResult->token->expires_at
-//        )->toDateTimeString()
     ]);
     }
     public function register(Request $request)
